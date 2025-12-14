@@ -20,6 +20,25 @@ Examples of others with the issue:
 * https://github.com/home-assistant/core/issues/66751
 * https://github.com/home-assistant/core/issues/69827
 
+#### Error 1
 It took a lot of digging around on the web to find the root of the first problem.  It comes down to MPD trying to reload the last played and now deleted Chime_tts temporary mp3 file when the Home Assistant media_player entity was activated.
 
 The solution in my setup was to use [homeassistant-ssh](../HomeAssistant/homeassistant-ssh.md) to send a `mpc clear` command **before** activating the MPD media_player in my Home Assistant script. This ensures that when the MPD media_player wakes up it doesn't try to reload the last played mp3 and its artwork.
+
+One time there was a MPD http 401 error that was being sent to Home Assistant and looked very similar since in included the file path.  MPD played the requested TTS message while still presenting the error string.  The MPC `clearerror` command resolved this issue.  It has not happened again since.
+
+#### Error 2
+There is a known issue with MPD generating this error when try to load the cover art associated with a temporary Chime_tts mp3 file.
+
+I have made sure the RPi_Server running the MPD instance has appropriate access in Home Assistant.
+```yaml
+homeassistant:
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      trusted_networks:
+        - 192.###.#.# <ip address of RPi_Server>
+  allowlist_external_dirs:
+    - "/media"
+```
+Probably more importantly I have turned on the Chime_tts option to include cover art in its temporary mp3s.  This option was added due to this issue.
