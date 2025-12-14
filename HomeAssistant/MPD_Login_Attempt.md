@@ -27,6 +27,8 @@ The solution in my setup was to use [homeassistant-ssh](../HomeAssistant/homeass
 
 One time there was a MPD http 401 error that was being sent to Home Assistant and looked very similar since in included the file path.  MPD played the requested TTS message while still presenting the error string.  The MPC `clearerror` command resolved this issue.  It has not happened again since.
 
+Note:  The Home Assistant temporary auth keys included in the mp3 file path apparently expire after a day.  
+
 #### Error 2
 There is a known issue with MPD generating this error when try to load the cover art associated with a temporary Chime_tts mp3 file.
 
@@ -42,3 +44,5 @@ homeassistant:
     - "/media"
 ```
 Probably more importantly I have turned on the Chime_tts option to include cover art in its temporary mp3s.  This option was added due to this issue.
+  
+<img width="581" height="307" alt="Screen Shot 2025-12-14 at 4 16 12 PM" src="https://github.com/user-attachments/assets/58136445-3b1d-4a12-b2d0-024d21b79f3c" />
