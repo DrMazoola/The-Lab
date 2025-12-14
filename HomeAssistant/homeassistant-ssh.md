@@ -19,7 +19,9 @@ These are expamples of code snippets for creating custom commands.  The first ex
   name: Set SA Volume
   key: set_sa_volume
 ```
-   
+
+I was plagued with the dreded *MPD Login or request with invalid authentication* notifications in Home Assistant when using [Chime_tts](https://github.com/nimroddolev/chime_tts).  
+I was able to use this command to send the `clear` command to MPC before turning on the `media_player` in Home Assistant and thus preventing MPD from trying to load the last played Chime_tts mp3.  I have a more detailed write up of my solution here.
 ```yaml
 - command: mpc -p 6601 clear
   name: mpd2_clear
