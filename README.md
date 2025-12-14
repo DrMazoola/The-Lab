@@ -3,4 +3,4 @@
 This repository is an electron lab notebook to document personnal projects and make solutions that have worked here available for to others.
 
 
-[Basic System Overview](main/BasicSystemOverview.md)
+[Basic System Overview](BasicSystemOverview.md)
