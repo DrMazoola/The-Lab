@@ -26,7 +26,7 @@ These are expamples of code snippets for creating custom commands.  The first ex
   key: mpd2_clear
 ```
 
-This an example of sensor used to read back the volume of a specific `sink-input` using [pa_volume](main/RPi_Server/PA_Volume/pa_volume.md).  The grep is used to return only the digits making up the volume in the response.  If the `sink-input` name had numeric digits a more refined regex would be needed.
+This an example of sensor used to read back the volume of a specific `sink-input` using [pa_volume](../RPi_Server/PA_Volume/pa_volume.md).  The grep is used to return only the digits making up the volume in the response.  If the `sink-input` name had numeric digits a more refined regex would be needed.
 ```yaml
 - command: pa_volume "ALSA plug-in [shairport-sync]" | grep -Eo '[0-9]+'
   scan_interval: 2
