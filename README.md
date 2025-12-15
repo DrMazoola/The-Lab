@@ -4,3 +4,7 @@ This repository is an electron lab notebook to document personnal projects and m
   
 
 [Basic System Overview](BasicSystemOverview.md)
+
+[Home Assistant](/HomeAssistant/homeassistant.md)
+
+[RPi_Server](/RPi_Server/rpi_server.md)
