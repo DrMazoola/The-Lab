@@ -64,4 +64,4 @@ Updated the `etc/shairport-sync.conf` file with mqtt info.  This was my first ex
 * Restarted Home Assistant
 
 ### Volume Control
-Application level volume control is provided by Pulse Audio.  Installation and configuration details [here](./RPi_Server/Pulse_Audio/pulse_audio.md).
+Application level volume control is provided by Pulse Audio.  Installation and configuration details [here](../RPi_Server/Pulse_Audio/pulse_audio.md).
