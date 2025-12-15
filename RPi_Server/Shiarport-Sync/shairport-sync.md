@@ -65,3 +65,6 @@ Updated the `etc/shairport-sync.conf` file with mqtt info.  This was my first ex
 
 ### Volume Control
 Application level volume control is provided by Pulse Audio.  Installation and configuration details [here](../Pulse_Audio/pulse_audio.md).
+
+### Simple Command Line Volume Commands
+Installed PA_Volume to simplify the volume of specific applications and to be able to refer to them by name rather than index number.  Installation and configuration details [here](../PA_Volume/pa_volume.md).
