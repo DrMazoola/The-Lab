@@ -56,3 +56,12 @@ $ make
 # systemctl enable shairport-sync
 # systemctl start shairport-sync
 ```
+Updated the `etc/shairport-sync.conf` file with mqtt info.  This was my first experience with MQTT.  I needed to use MQTT Explorer to help debug and get everything communicating.
+  
+### Home Assistant Stuff
+* Installed the MQTT Add-on and Integration
+* Installed `Shairport Sync Media Player` from HACS
+* Restarted Home Assistant
+
+### Volume Control
+Application level volume control is provided by Pulse Audio.  Installation and configuration details [here](./RPi_Server/Pulse_Audio/pulse_audio.md).
