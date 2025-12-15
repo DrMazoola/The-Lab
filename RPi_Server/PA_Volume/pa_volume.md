@@ -14,3 +14,12 @@ Using homeassistant-ssh to send the commands.  *Homeassistant-ssh* is set up to 
 
 1. Use a Home Assistant number helper to selected the desired volume level (0-100).
 2. Activate the *homeassistant-ssh* button.
+
+### Installation
+Followed the instructions at [PA_Volume](https://github.com/rhaas80/pa_volume)
+  
+Placed the executable and manual files as follows.
+```
+RPi_Server:/pa_volume $ sudo cp pa_volume /usr/local/bin/pa_volume
+RPi_Server:/pa_volume $ sudo cp pa_volume.1 /usr/share/man/pa_volume.1
+```
