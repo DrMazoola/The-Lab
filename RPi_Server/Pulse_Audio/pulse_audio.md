@@ -1,6 +1,18 @@
 # Pulse Audio
 
-Under Construction
+Using Pulse Audio to control the volume of only Shairport-Sync application while leaving the system volume alone.  This allows an announcement to be made by an MPD instance running on the same RPi_Server.  The ability to remotely control the AirPlay2 stream (pause or change volume) is currently not working due to a [known issue](https://github.com/mikebrady/shairport-sync/issues/1858) in an Apple update.  My work around is to duck the Shairport-Sync volume using Pulse Audio
+
+Features that are important:
+* Ability to control the volume of each individual application
+
+Installation took some troubleshooting to get Pulse Audio running in system mode on this headless system and to set the various user groups to allow it to detect and report the currently playing application (i.e. sink-input).  This installation is set up for passing raw TCP commands.  However, I am currently using SSH to get to the full `pactl` command line tool.
+
+### Install Libraries
+Didn't orginally have this one and recieved and while audio functioned the TCP interfaces weren't working.
+`apt install at-spi2-core`
+
+### Install Pulse Audio (System Mode)
+Followed steps 3 through 7 in these [instructions](https://github.com/FutureProofHomes/wyoming-enhancements/blob/master/snapcast/docs/2_install_pulseaudio.md)
 
 -------------------------------------------------------------------------------
 
