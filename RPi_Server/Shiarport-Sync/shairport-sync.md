@@ -13,7 +13,7 @@ Features that are important:
 Repository: [hass-shairport-sync](https://github.com/parautenbach/hass-shairport-sync)
 
 The installation on the [RPi_Server](../rpi_server.md) was relatively straight forward following the instructions.  
-The MQTT remote control feature currently doesn't work due to a change in Apple's protocol.  This would be very handy to pause the sound source while a TTS announcment is made.  The current work around is to use [PA_Volume](../RPi_Server/PA_Voume.md) and [Pulse Audio](../RPi_Server/Pulse_Audio.md) to lower the volume of Shairport-Sync while the announcement is made.
+The MQTT remote control feature currently doesn't work due to a change in Apple's protocol.  This would be very handy to pause the sound source while a TTS announcment is made.  The current work around is to use [PA_Volume](../PA_Voume.md) and [Pulse Audio](../Pulse_Audio.md) to lower the volume of Shairport-Sync while the announcement is made.
 
 Installation generally followed the instruction, but there are some customizations.
 
