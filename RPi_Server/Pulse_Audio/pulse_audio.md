@@ -8,40 +8,26 @@ Features that are important:
 Installation took some troubleshooting to get Pulse Audio running in system mode on this headless system and to set the various user groups to allow it to detect and report the currently playing application (i.e. sink-input).  This installation is set up for passing raw TCP commands.  However, I am currently using SSH to get to the full `pactl` command line tool.
 
 ### Install Libraries
-Didn't orginally have this one and recieved and while audio functioned the TCP interfaces weren't working.
+Didn't orginally have this one and recieved and while audio functioned the TCP interfaces weren't working.  
+
 `apt install at-spi2-core`
 
 ### Install Pulse Audio (System Mode)
-Followed steps 3 through 7 in these [instructions](https://github.com/FutureProofHomes/wyoming-enhancements/blob/master/snapcast/docs/2_install_pulseaudio.md)
+Followed steps 3 through 13 in these [instructions](https://github.com/FutureProofHomes/wyoming-enhancements/blob/master/snapcast/docs/2_install_pulseaudio.md)  
 
--------------------------------------------------------------------------------
+At this point Shairport-Sync was running and accepting an AirPlay stream, but no audio was coming out.  
+Set `output_backend = "alsa"` in the `etc/Shairport-Sync.conf` file.  Apparently this helps avoid conflicts.  
+  
+Audio output on the 3.5mm headphone jack was now working, the `pactl` command was showing no active sink, source, and sink-inputs event while audio was playing.  Needed to make sure everything had the right permissions
 
-apt install at-spi2-core
+`sudo adduser shairport-sync pulse`
+`sudo adduser shairport-sync pulse-access`
+`sudo usermod -a -G audio pulse`
 
-follow these instructions for installing pulseaudio at the system level
-https://github.com/FutureProofHomes/wyoming-enhancements/blob/master/snapcast/docs/2_install_pulseaudio.md
+To get PulseAudio to work with TCP needed to add the following.
 
-pulseaudio stopped shairport from making sound
-	In shairport-sync.conf, set the alsa backend to this specific device instead of "default" to avoid conflicts.
+`sudo systemctl start avahi-daemon.service`
+`load-module module-cli-protocol-tcp port=4712` in the `etc/pulse/system.pa` file.
 
+When running PulseAudio in system mode the `system.pa` is used rather than the `default.pa`.
 
-Needed these access to get pulseaudio to see shairport playing
-sudo adduser shairport-sync pulse
-sudo adduser shairport-sync pulse-access 
-
-
-
-pulseaudio needs to be running as user
- systemctl --user enable pulseaudio.service
-
-
-
-sudo usermod -a -G audio pulse
-sudo systemctl start avahi-daemon.service
-
-
-added the following to the /etc/pulse/system.pa file (this got the modules to load as system)!!
-	load-module module-cli-protocol-tcp port=4712
-
-	load-module module-native-protocol-tcp port=4713 auth-ip-acl=192.0.0.0/8
-	load-module module-zeroconf-publish
