@@ -20,9 +20,9 @@ Set `output_backend = "alsa"` in the `etc/Shairport-Sync.conf` file.  Apparently
   
 Audio output on the 3.5mm headphone jack was now working, the `pactl` command was showing no active sink, source, and sink-inputs event while audio was playing.  Needed to make sure everything had the right permissions
 
-`sudo adduser shairport-sync pulse`
-`sudo adduser shairport-sync pulse-access`
-`sudo usermod -a -G audio pulse`
+`sudo adduser shairport-sync pulse`  
+`sudo adduser shairport-sync pulse-access`  
+`sudo usermod -a -G audio pulse`  
 
 To get PulseAudio to work with TCP needed to add the following.
 
