@@ -68,3 +68,9 @@ Application level volume control is provided by Pulse Audio.  Installation and c
 
 ### Simple Command Line Volume Commands
 Installed PA_Volume to simplify the volume of specific applications and to be able to refer to them by name rather than index number.  Installation and configuration details [here](../PA_Volume/pa_volume.md).
+
+### Troubleshooting
+Needed to do the following to get Shairport-Sync to work with PulseAudio
+`sudo adduser shairport-sync pulse`  
+`sudo adduser shairport-sync pulse-access`  
+`sudo usermod -a -G audio pulse`  
