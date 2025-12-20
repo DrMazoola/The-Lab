@@ -30,7 +30,7 @@ Set permissions
   
 ### Set up FSTAB to automount on reboot
 I've added two lines to fstab.  The first is to mount a smb drive as the webdav root folder
-`//<NAS IP>/W /mnt/unasW cifs credentials=/root/smbcredentials,uid=www-data,gid=www-data,dir_mode=0777,file_mode=0777,nounix,x-systemd.automount 0 0`
+`//<NAS IP>/W /mnt/unasW cifs credentials=/root/smbcredentials,uid=www-data,gid=www-data,dir_mode=0777,file_mode=0777,nounix,x-systemd.automount 0 0`  
 Note that this needed to run as root (via credential location) and give the correct ownership and permissions when mounted.  
 
 The second line is to mount a local shared drive hosted on the NAS and mount is as the server admin  
