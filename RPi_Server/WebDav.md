@@ -29,25 +29,8 @@ sudo mkdir -p /usr/local/apache/var/
 sudo chown www-data:www-data /usr/local/apache/var
 sudo chmod 766 /usr/local/apache/var
 ```
-### Apache2 Config
+### Apache2 Config with SSL
 Edit the default Apache configuration file (/etc/apache2/sites-available/000-default.conf) to include the WebDAV directives.  
-
-First line 
-`DavLockDB /usr/local/apache/var/DavLock`
-
-Before the closing of the VirtualHost section
-```
-Alias /webdav /mnt/UNAS_W/
-<Location /webdav>
-    DAV On
-    AuthType Digest
-    AuthName "WebDAV"
-    AuthUserFile /etc/apache2/webdav.passwd
-    Require valid-user
-    Options Indexes FollowSymLinks
-</Location>
-```
-With SSL
 ```
 DavLockDB /usr/local/apache/var/DavLock
 
@@ -80,7 +63,7 @@ DavLockDB /usr/local/apache/var/DavLock
         # after it has been globally disabled with "a2disconf".
         #Include conf-available/serve-cgi-bin.conf
 
-        Alias /webdav /mnt/UNAS_W
+        Alias /webdav /mnt/unasW/
 
         SSLEngine on
         SSLCertificateFile /etc/ssl/certs/tls.crt
@@ -92,13 +75,12 @@ DavLockDB /usr/local/apache/var/DavLock
           AuthName "WebDAV"
           AuthUserFile /etc/apache2/webdav.passwd
           Require valid-user
-          Options Indexes FollowSymLinks MultiViews
-          DirectoryIndex disabled # Crucial for clean WebDAV operation
+          Options Indexes FollowSymLinks
+          #DirectoryIndex enabled
         </Location>
 
 </VirtualHost>
-```
-  
+```  
 ### Create User
 Create a password file and add a user (replace username with your desired user).  
 ```
