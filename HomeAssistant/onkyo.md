@@ -13,6 +13,15 @@ Features that are important:
   * ESP-WROOM-32 Module
   * 3.5mm TS female plug
   * 3.5mm TS male-to-male patch cable
+  * 1000 ohm resistor
+
+The ESP32 GPIO output pin is wired to the tip connector of the 3.5mm TS jack with a 1000 ohm resistor in-line.  This is to limit the current and prevent potential shorts.
+
+The ground pin of the ESP32 is wired to both the ring and shield of the 3.5mm TS jack.  The Onkyo RI protocol only uses two wires.  This step is needed when using 3-wire or stereo jacks and cables.
+
+The Onkyo TX-SR605 must be set to use the RI DOCK.  This is done by pressing and holding the TAPE botton on the front of the reciever.  It will cycle through the options `TAPE -> MD -> CDR -> DOCK -> (repeats)`.  Select the DOCK option.
+
+The analog sound source is connected to the TAPE in RCA connectors on the back of the receiver.  In this case it is signal from the [RPi_Server](/RPi_Server/rpi_server.md).
 
 ### Onkyo RI Protocol:
 The references provide additional details on the RI protocol.  There is a message header followed by a 12-bit message and a trailer.  
@@ -49,8 +58,47 @@ button:
 ```
 
 ### RI Codes
+
+#### TEST 5-00
 | Command | Hex Code | Binary String |
 | --- | --- | --- | 
-| TEST 5-00 | 0x43F | 0100	0011	1111 |
+| TEST 5-00 | 0x43F | 0100 0011 1111 |
 
-`[3000,-1000,1000,-1000,1000,-2000,1000,-1000,1000,-1000,1000,-1000,1000,-1000,1000,-2000,1000,-2000,1000,-2000,1000,-2000,1000,-2000,1000,-2000,1000,-7000]`
+`code: [3000,-1000,1000,-1000,1000,-2000,1000,-1000,1000,-1000,1000,-1000,1000,-1000,1000,-2000,1000,-2000,1000,-2000,1000,-2000,1000,-2000,1000,-2000,1000,-7000]`
+
+#### ON to GAME/TV
+| Command | Hex Code | Binary String |
+| --- | --- | --- | 
+| Turn On + GAME/TV | 0x1AF | 0001 1010 1111 |
+
+`code: [3000,-1000,1000,-1000,1000,-1000,1000,-1000,1000,-2000,1000,-2000,1000,-1000,1000,-2000,1000,-1000,1000,-2000,1000,-2000,1000,-2000,1000,-2000,1000,-7000]`
+
+#### ON to TAPE
+| Command | Hex Code | Binary String |
+| --- | --- | --- | 
+| Turn On + TAPE | 0x07F | 0000 0111 1111 |
+
+`code: [3000,-1000,1000,-1000,1000,-1000,1000,-1000,1000,-1000,1000,-1000,1000,-2000,1000,-2000,1000,-2000,1000,-2000,1000,-2000,1000,-2000,1000,-2000,1000,-7000]`
+
+#### Swich to GAME/TV
+| Command | Hex Code | Binary String |
+| --- | --- | --- | 
+| Input GAME/TV | 0x1AO | 0001 1010	0000 |
+
+`code: [3000,-1000,1000,-1000,1000,-1000,1000,-1000,1000,-2000,1000,-2000,1000,-1000,1000,-2000,1000,-1000,1000,-1000,1000,-1000,1000,-1000,1000,-1000,1000,-7000]`
+
+#### Switch to TAPE
+| Command | Hex Code | Binary String |
+| --- | --- | --- | 
+| Input TAPE | 0x070| 0000 0111 0000 |
+
+`code: [3000,-1000,1000,-1000,1000,-1000,1000,-1000,1000,-1000,1000,-1000,1000,-2000,1000,-2000,1000,-2000,1000,-1000,1000,-1000,1000,-1000,1000,-1000,1000,-7000]`
+
+#### STANDBY
+*Note: Only works when in GAME/TV mode.*
+
+| Command | Hex Code | Binary String |
+| --- | --- | --- | 
+| Standby | 0x1EA| 0001 1010 1110 |
+
+`code: [3000,-1000,1000,-1000,1000,-1000,1000,-1000,1000,-2000,1000,-2000,1000,-1000,1000,-2000,1000,-1000,1000,-2000,1000,-2000,1000,-2000,1000,-1000,1000,-7000]`
