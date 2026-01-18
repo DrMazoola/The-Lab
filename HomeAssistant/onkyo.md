@@ -49,5 +49,6 @@ button:
 ```
 
 ### RI Codes
-<u>Command      Hex Code    Binary String</u>
-TEST 5-00       0x43F       0100	0011	1111
+| Command | Hex Code | Binary String |
+| --- | --- | --- | 
+| TEST 5-00 | 0x43F | 0100	0011	1111 |
