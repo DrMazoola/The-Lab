@@ -87,3 +87,14 @@ Finally added the following at the very end of the script file.
 trap 'rc=$?; report failed "Failed at line $LINENO (exit code $rc)"; exit $rc' ERR
 ```
 
+##### Debugging 
+The HA shell command has a timeout (60s) that was killing the ssh session and the script itself.  Need to make the ssh call run the script detached from the ssh session with the following:
+```
+shell_command:
+  pi_update: >
+    ssh -i /config/.ssh/id_ed25519
+    -o UserKnownHostsFile=/config/.ssh/known_hosts
+    -o StrictHostKeyChecking=accept-new
+    youruser@PI_IP_ADDRESS
+    'setsid nohup /home/youruser/update.sh > /home/youruser/update.log 2>&1 < /dev/null &'
+```
