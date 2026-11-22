@@ -55,3 +55,35 @@ sudo chmod 600 /etc/mosquitto/passwd
 
 Restart the service
 ```sudo systemctl restart mosquitto```
+
+##### Update Script Modification
+Added the following to the beginning of the existing update script that updates first the server itself and then Pi-hole. 
+
+```
+set -eEuo pipefail
+
+MQTT_HOST="localhost"
+MQTT_USER="haupdates"
+MQTT_PASS="yourpassword"
+TOPIC="pi/updates/status"
+
+report() {  # usage: report <status> <message>
+  mosquitto_pub -h "$MQTT_HOST" -u "$MQTT_USER" -P "$MQTT_PASS" \
+    -t "$TOPIC" -r \
+    -m "{\"status\":\"$1\",\"message\":\"$2\",\"timestamp\":\"$(date -Iseconds)\"}" || true
+}
+```
+
+Appended a mqtt report after every line of code that was writing to log
+Example:
+```
+log "Removing unused packages..."
+report running "Removing unused packages..."
+```
+
+Finally added the following at the very end of the script file.
+```
+# Report any failure automatically
+trap 'rc=$?; report failed "Failed at line $LINENO (exit code $rc)"; exit $rc' ERR
+```
+
