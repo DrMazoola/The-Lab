@@ -49,8 +49,9 @@ Allow Home Assistant to connect.  Create password and config files.
 ```
 sudo mosquitto_passwd -c /etc/mosquitto/passwd haupdates
 sudo nano /etc/mosquitto/conf.d/ha.conf
-sudo chown mosquitto:mosquitto /etc/mosquitto/passwd
-sudo chmod 600 /etc/mosquitto/passwd
+
+sudo chown root:mosquitto /etc/mosquitto/passwd
+sudo chmod 640 /etc/mosquitto/passwd
 ```
 
 Restart the service
